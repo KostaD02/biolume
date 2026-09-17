@@ -1,0 +1,28 @@
+{
+  "name": "biolume",
+  "version": "0.0.0",
+  "description": "A deep-sea theme for VS Code: a mint glow on deep navy",
+  "main": "index.js",
+  "keywords": [
+    "theme",
+    "dark theme",
+    "deep-sea theme",
+    "mint theme",
+    "glow theme",
+    "navy theme"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/KostaD02/biolume/issues"
+  },
+  "homepage": "https://github.com/KostaD02/biolume#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KostaD02/biolume.git"
+  },
+  "author": "Konstantine Datunishvili <konstantineda@datunishvili.ge>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.2"
+}
