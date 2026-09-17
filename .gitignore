@@ -1,3 +1,7 @@
 # module
 
 node_modules
+
+# Compiled
+
+dist
