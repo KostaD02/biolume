@@ -1,0 +1,64 @@
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+index d9848bf..1604ef2 100644
+--- a/.github/workflows/release.yml
++++ b/.github/workflows/release.yml
+@@ -83,6 +83,7 @@ jobs:
+     runs-on: ubuntu-latest
+     permissions:
+       contents: write
++      id-token: write
+     env:
+       SPECIFIER: ${{ needs.check.outputs.specifier }}
+     steps:
+@@ -98,8 +99,11 @@ jobs:
+           git config user.name "github-actions[bot]"
+           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+ 
++      - name: Upgrade npm for trusted publishing
++        run: npm install -g npm@latest
++
+       - name: Run release-it
+-        run: pnpm exec release-it "$SPECIFIER" --ci
++        run: pnpm exec release-it "$SPECIFIER" --ci --npm.skipChecks
+ 
+       - name: Read new version
+         id: v
+diff --git a/README.md b/README.md
+index fdadbd8..5424587 100644
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,7 @@
+ </h1>
+ 
+ <p align="center">
+-    <img src="https://raw.githubusercontent.com/KostaD02/brand/refs/heads/main/public/logo_500x500_circle.png" alt="brand-logo" width="120" height="120" />
++    <img src="https://raw.githubusercontent.com/KostaD02/brand/refs/heads/main/public/logo_500x500.png" alt="brand-logo" width="120" height="120" />
+     <br />
+     <em>The design system for <a href="https://konstantinedatunishvili.com" target="_blank"> Konstantine Datunishvili's</a> projects.</em>
+     <br />
+diff --git a/package.json b/package.json
+index feac880..fd0fb0c 100644
+--- a/package.json
++++ b/package.json
+@@ -108,7 +108,7 @@
+   },
+   "release-it": {
+     "git": {
+-      "commitMessage": "chore: release v${version}",
++      "commitMessage": "chore: release v${version} [skip ci]",
+       "tagName": "v${version}",
+       "requireBranch": "main"
+     },
+@@ -116,7 +116,7 @@
+       "release": false
+     },
+     "npm": {
+-      "publish": false
++      "publish": true
+     },
+     "hooks": {
+       "before:init": [
+diff --git a/public/logo_500x500.png b/public/logo_500x500.png
+new file mode 100644
+index 0000000..717f2e1
+Binary files /dev/null and b/public/logo_500x500.png differ

@@ -1,24 +1,63 @@
 {
   "name": "biolume",
+  "displayName": "Biolume",
   "version": "0.0.0",
+  "private": true,
   "type": "module",
-  "description": "A deep-sea theme for VS Code: a mint glow on deep navy",
-  "main": "index.js",
+  "description": "A deep-sea theme in dark and light: a mint glow on deep navy or soft paper.",
+  "publisher": "biolume",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#0a192f",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes"
+  ],
   "keywords": [
     "theme",
     "dark theme",
+    "light theme",
+    "color theme",
     "deep-sea theme",
     "mint theme",
     "glow theme",
     "navy theme"
   ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Biolume",
+        "uiTheme": "vs-dark",
+        "path": "./dist/biolume-color-theme.json"
+      },
+      {
+        "label": "Biolume Light",
+        "uiTheme": "vs",
+        "path": "./dist/biolume-light-color-theme.json"
+      }
+    ]
+  },
   "scripts": {
     "prepare": "husky",
+    "build": "tsx scripts/build.ts",
+    "build:silent": "tsx scripts/build.ts --silent",
+    "watch": "tsx watch --clear-screen=false scripts/build.ts",
+    "vscode:prepublish": "pnpm run build:silent",
+    "test": "tsx --test \"test/**/*.test.ts\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --no-dependencies --out dist/",
+    "release": "release-it",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major"
   },
   "bugs": {
     "url": "https://github.com/KostaD02/biolume/issues"
@@ -31,20 +70,78 @@
   "author": "Konstantine Datunishvili <konstantineda@datunishvili.ge>",
   "license": "MIT",
   "packageManager": "pnpm@10.33.2",
-  "dependencies": {
-    "@kostad/brand": "^1.4.0"
-  },
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
     "@eslint/js": "^10.0.1",
+    "@kostad/brand": "1.4.0",
+    "@release-it/conventional-changelog": "^12.0.2",
     "@types/node": "^22.20.3",
+    "@vscode/vsce": "^4.0.0",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
+    "ovsx": "^1.2.0",
     "prettier": "^3.9.7",
+    "release-it": "^21.0.3",
     "tsx": "^4.23.9",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.70.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@vscode/vsce-sign",
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "keytar"
+    ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "tagName": "v${version}",
+      "requireBranch": "main"
+    },
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "before:init": [
+        "pnpm run lint",
+        "pnpm run typecheck",
+        "pnpm run test"
+      ],
+      "after:bump": "pnpm run build"
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "docs",
+              "section": "Documentations"
+            },
+            {
+              "type": "refactor",
+              "section": "Refactors"
+            }
+          ]
+        }
+      }
+    }
   }
 }
