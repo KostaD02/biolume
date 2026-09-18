@@ -148,6 +148,22 @@ export function contrast(color: Hex, background: Hex): number {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
+export function ensureContrast(
+  color: Hex,
+  background: Hex,
+  minimum: number,
+  ink: Hex,
+): Hex {
+  for (let step = 0; step <= 100; step++) {
+    const candidate = mix(ink, color, step / 100);
+    if (contrast(candidate, background) >= minimum) {
+      return candidate;
+    }
+  }
+
+  throw new Error(`${color} can't reach ${minimum} contrast on ${background}`);
+}
+
 export interface OkLab {
   l: number;
   a: number;
