@@ -1,7 +1,7 @@
 {
   "name": "biolume",
   "displayName": "Biolume",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "A deep-sea theme in dark and light: a mint glow on deep navy or soft paper.",
