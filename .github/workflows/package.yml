@@ -29,6 +29,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.vsix-name.outputs.name }}
-          path: "*.vsix"
+          path: dist/*.vsix
           if-no-files-found: error
           retention-days: 1
