@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Steam Idler</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a192f" />
+    <script>
+      (function () {
+        var stored = null;
+
+        try {
+          stored = JSON.parse(localStorage.getItem('theme'));
+        } catch {
+          stored = null;
+        }
+
+        var theme = stored === 'light' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', theme);
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute('content', theme === 'light' ? '#f5f7fb' : '#0a192f');
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Open-source self-hosted app to idle Steam games, farm trading cards and manage all your accounts."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="icons/pwa-maskable-512.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <si-root>
+      <div class="app-loader" role="status" aria-busy="true">
+        <span class="kd-spinner kd-spinner--lg" aria-hidden="true"></span>
+        <span class="kd-visually-hidden">Loading…</span>
+      </div>
+    </si-root>
+  </body>
+</html>

@@ -1,2 +1,6 @@
 node_modules
 pnpm-lock.yaml
+dist
+samples
+CHANGELOG.md
+*.vsix

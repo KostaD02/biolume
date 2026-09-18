@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="112" />
+    </clipPath>
+
+    <radialGradient id="halo" cx="256" cy="214" r="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64ffda" stop-opacity="0.42" />
+      <stop offset="0.4" stop-color="#64ffda" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#64ffda" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="bell" x1="0" y1="112" x2="0" y2="252" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6f1ff" />
+      <stop offset="1" stop-color="#64ffda" />
+    </linearGradient>
+
+    <linearGradient id="tentacle" x1="0" y1="236" x2="0" y2="424" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64ffda" />
+      <stop offset="1" stop-color="#64ffda" stop-opacity="0.2" />
+    </linearGradient>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="#0a192f" />
+
+  <g clip-path="url(#tile)">
+    <circle cx="256" cy="214" r="236" fill="url(#halo)" />
+
+    <g fill="#64ffda">
+      <circle cx="110" cy="170" r="6" opacity="0.5" />
+      <circle cx="402" cy="124" r="4.5" opacity="0.45" />
+      <circle cx="424" cy="300" r="7" opacity="0.35" />
+      <circle cx="94" cy="328" r="4" opacity="0.5" />
+      <circle cx="150" cy="430" r="5" opacity="0.35" />
+      <circle cx="370" cy="422" r="4" opacity="0.5" />
+      <circle cx="172" cy="80" r="3.5" opacity="0.4" />
+    </g>
+
+    <g filter="url(#glow)">
+      <g fill="none" stroke="url(#tentacle)" stroke-linecap="round">
+        <path d="M194 236c-14 24 14 46 -2 70s12 46 -6 68" stroke-width="8" />
+        <path d="M236 240c-14 24 14 46 0 70s14 46 0 70s14 30 0 44" stroke-width="10" />
+        <path d="M276 240c14 24 -14 46 0 70s-14 46 0 70s-14 30 0 44" stroke-width="10" />
+        <path d="M318 236c14 24 -14 46 2 70s-12 46 6 68" stroke-width="8" />
+      </g>
+
+      <path
+        d="M146 236C146 160 194 104 256 104C318 104 366 160 366 236Q344 257 322 242Q300 261 278 245Q256 263 234 245Q212 261 190 242Q168 257 146 236Z"
+        fill="url(#bell)"
+      />
+      <ellipse cx="212" cy="150" rx="30" ry="14" fill="#ffffff" opacity="0.5" transform="rotate(-32 212 150)" />
+      <circle cx="178" cy="182" r="5.5" fill="#ffffff" opacity="0.4" />
+    </g>
+  </g>
+</svg>

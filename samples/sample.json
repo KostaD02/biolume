@@ -1,0 +1,62 @@
+{
+  "name": "@kostad/brand",
+  "version": "1.3.2",
+  "description": "Personal branding",
+  "keywords": [
+    "brand",
+    "design-tokens",
+    "design-system",
+    "scss",
+    "css"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "exports": {
+    ".": {
+      "sass": "./scss/main.scss",
+      "style": "./dist/kostad-brand.css",
+      "default": "./dist/kostad-brand.css"
+    },
+    "./css": "./dist/kostad-brand.css",
+    "./css/min": "./dist/kostad-brand.min.css",
+    "./tokens.json": "./dist/kostad-brand-tokens.json",
+    "./scss": "./scss/main.scss",
+    "./scss/*": "./scss/*",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "sass": ">=1.79"
+  },
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "tagName": "v${version}",
+      "requireBranch": "main"
+    },
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": true
+    },
+    "hooks": {
+      "before:init": [
+        "pnpm run lint",
+        "pnpm run typecheck"
+      ],
+      "after:bump": "pnpm run build"
+    }
+  }
+}
