@@ -21,10 +21,10 @@ Biolume comes in two themes:
 Or install it from the command line:
 
 ```sh
-code --install-extension biolume.biolume
+code --install-extension kostad02.biolume
 ```
 
-Biolume is also on [Open VSX](https://open-vsx.org/extension/biolume/biolume), for VSCodium and other editors that use it.
+Biolume is also on [Open VSX](https://open-vsx.org/extension/kostad02/biolume), for VSCodium and other editors that use it.
 
 ## License
 
