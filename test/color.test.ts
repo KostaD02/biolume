@@ -6,6 +6,7 @@ import {
   colorDistance,
   composite,
   contrast,
+  ensureContrast,
   isHex,
   mix,
   toHex,
@@ -77,6 +78,25 @@ describe("contrast", () => {
   it("blends translucent colors over the background", () => {
     assert.equal(composite("#ffffff80", "#000000"), "#808080");
     assert.equal(contrast("#00000000", "#ffffff").toFixed(2), "1.00");
+  });
+});
+
+describe("ensureContrast", () => {
+  it("keeps colors that already pass", () => {
+    assert.equal(ensureContrast("#0a192f", "#ffffff", 4.5, "#000000"), "#0a192f");
+  });
+
+  it("mixes in just enough ink to pass", () => {
+    const color = ensureContrast("#888888", "#ffffff", 4.5, "#000000");
+    assert.ok(contrast(color, "#ffffff") >= 4.5);
+    assert.ok(contrast(mix("#ffffff", color, 0.02), "#ffffff") < 4.5);
+  });
+
+  it("throws when even the ink can't pass", () => {
+    assert.throws(
+      () => ensureContrast("#eeeeee", "#ffffff", 4.5, "#dddddd"),
+      /can't reach/,
+    );
   });
 });
 

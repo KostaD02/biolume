@@ -1,5 +1,5 @@
 import { brand, type ThemeRole } from "./brand.ts";
-import { type Hex, mix, withAlpha } from "./color.ts";
+import { ensureContrast, type Hex, mix, withAlpha } from "./color.ts";
 import type { SyntaxRole } from "./syntax/roles.ts";
 
 export const ansiColors = [
@@ -79,6 +79,46 @@ export interface Palette {
 }
 
 type BrandRoles = Record<ThemeRole, Hex>;
+
+/** Roles drawn as text on `bg`, which must stay readable when `bg` changes */
+const textRoles = [
+  "text-secondary",
+  "text-muted",
+  "accent",
+  "warning",
+  "danger",
+  "code-inline-fg",
+  "code-comment",
+  "code-storage",
+  "code-control",
+  "code-function",
+  "code-type",
+  "code-variable",
+  "code-constant",
+  "code-string",
+  "code-number",
+  "code-regexp",
+  "code-escape",
+  "code-punctuation",
+  "code-invalid",
+] as const satisfies readonly ThemeRole[];
+
+/** Deepens text roles toward the primary text just enough to stay readable on `bg` */
+function readableOnBackground(roles: BrandRoles): BrandRoles {
+  const readable = { ...roles };
+
+  for (const role of textRoles) {
+    const minimum = role === "code-comment" ? 3 : 4.5;
+    readable[role] = ensureContrast(
+      roles[role],
+      roles.bg,
+      minimum,
+      roles["text-primary"],
+    );
+  }
+
+  return readable;
+}
 
 function syntaxColors(roles: BrandRoles): Record<SyntaxRole, Hex> {
   return {
@@ -176,17 +216,26 @@ export const dark: Palette = {
   },
 };
 
-const lightFields = sharedFields(brand.light);
+/** Brand paper glares as a full editor, so every layer steps one brand shade darker */
+const lightFields = sharedFields(
+  readableOnBackground({
+    ...brand.light,
+    bg: brand.light.border,
+    "bg-surface": brand.light["bg-elevated-hover"],
+    border: brand.light["border-strong"],
+    "border-strong": brand.color["slate-light"],
+  }),
+);
 
 export const light: Palette = {
   ...lightFields,
   accentMuted: lightFields.accent,
   accentFill: lightFields.accent,
-  accentMid: mix(lightFields.accent, lightFields.bg, 0.65),
+  accentMid: mix(lightFields.accent, lightFields.bg, 0.7),
   warningMuted: lightFields.warning,
-  chartPurple: mix(lightFields.syntax.control, lightFields.bg, 0.75),
-  dim: brand.light["text-muted"],
-  scrollbar: brand.light["text-muted"],
+  chartPurple: mix(lightFields.syntax.control, lightFields.bg, 0.7),
+  dim: lightFields.muted,
+  scrollbar: lightFields.muted,
   shadow: brand.shadow.light,
   ansi: {
     black: lightFields.text,
