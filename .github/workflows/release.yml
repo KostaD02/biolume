@@ -98,7 +98,7 @@ jobs:
           fetch-depth: 0
           ssh-key: ${{ secrets.RELEASE_SSH_KEY }}
 
-      - uses: ./.github/actions/setup
+      - uses: KostaD02/ci/.github/actions/setup@v1
 
       - name: Configure git author
         run: |
@@ -142,7 +142,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: ./.github/actions/setup
+      - uses: KostaD02/ci/.github/actions/setup@v1
 
       - name: Download VSIX from the GitHub Release
         env:
@@ -176,7 +176,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: ./.github/actions/setup
+      - uses: KostaD02/ci/.github/actions/setup@v1
 
       - name: Download VSIX from the GitHub Release
         env:
