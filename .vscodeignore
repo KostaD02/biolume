@@ -5,3 +5,5 @@
 !CHANGELOG.md
 !LICENSE
 !package.json
+!syntaxes/*.json
+!language-configuration.json
