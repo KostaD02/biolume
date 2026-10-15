@@ -1,0 +1,14 @@
+---
+title: Hello
+layout: base.njk
+---
+{# a comment #}
+{% extends "base.njk" %}
+{% set items = [1, 2, 3] %}
+<section class="hero">
+  <h1>{{ title | upper }}</h1>
+  {% for item in items %}
+    <li data-id="{{ item }}">{{ loop.index }}</li>
+  {% endfor %}
+  <style>.hero { color: red; }</style>
+</section>

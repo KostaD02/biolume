@@ -39,6 +39,37 @@
         "uiTheme": "vs",
         "path": "./dist/biolume-light-color-theme.json"
       }
+    ],
+    "languages": [
+      {
+        "id": "nunjucks",
+        "aliases": [
+          "Nunjucks",
+          "njk"
+        ],
+        "extensions": [
+          ".njk"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nunjucks",
+        "scopeName": "text.html.nunjucks",
+        "path": "./syntaxes/nunjucks.tmLanguage.json",
+        "embeddedLanguages": {
+          "source.css": "css",
+          "source.js": "javascript"
+        }
+      },
+      {
+        "scopeName": "nunjucks.injection",
+        "path": "./syntaxes/nunjucks-injection.tmLanguage.json",
+        "injectTo": [
+          "text.html.nunjucks"
+        ]
+      }
     ]
   },
   "scripts": {

@@ -1,0 +1,5 @@
+{
+  "name": "Nunjucks",
+  "scopeName": "text.html.nunjucks",
+  "patterns": [{ "include": "text.html.basic" }]
+}
