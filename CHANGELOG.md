@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.0](https://github.com/KostaD02/biolume/compare/v1.0.0...v1.1.0) (2026-10-15)
+
+### Features
+
+* nunjucks grammar ([#8](https://github.com/KostaD02/biolume/issues/8)) ([b296ea5](https://github.com/KostaD02/biolume/commit/b296ea50f2f8d04d57399c4729ec35c2a559a198))
+
+### Documentations
+
+* **readme:** update ([6a123b6](https://github.com/KostaD02/biolume/commit/6a123b6a505290b0be4c5b83f4c3f1ab8d3ac993))
+
 ## 1.0.0 (2026-09-18)
 
 ### ⚠ BREAKING CHANGES
